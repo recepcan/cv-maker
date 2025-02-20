@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js"; // MongoDB bağlantısını içe aktar
 import bodyParser from 'body-parser';
 import cookieParser from "cookie-parser";
+import path from 'path'
 
 import userRoutes from './routes/userRoutes.js';
 import authRoutes from './routes/authRoutes.js';
@@ -21,7 +22,7 @@ dotenv.config(); // Çevresel değişkenleri yükle
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-
+const __dirname = path.resolve();
 // Middleware'ler
 app.use(cors());
 app.use(express.json());
@@ -35,6 +36,12 @@ app.use('/server', pdfRoutes);
 app.use('/server/user', userRoutes);
 app.use('/server/auth', authRoutes);
 app.use('/server/cv', cvRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 
 const PORT = process.env.PORT || 5000;
