@@ -16,7 +16,6 @@ import cvRoutes from './routes/cvRoutes.js';
 
 // Cookie parser middleware'i kullanıyoruz
 
-
 const app = express();
 dotenv.config(); // Çevresel değişkenleri yükle
 
@@ -27,9 +26,7 @@ const __dirname = path.resolve();
 app.use(cors());
 app.use(express.json());
 
-
 connectDB();
-
 
 // PDF oluşturma route'u
 app.use('/server', pdfRoutes);
