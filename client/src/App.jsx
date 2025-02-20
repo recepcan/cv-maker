@@ -9,7 +9,8 @@ import SignUp from "./pages/SignUp";
 import Panel from "./pages/Panel";
 import UpdateCv from "./pages/UpdateCv";
 import { ToastContainer, toast } from 'react-toastify';
-import "./app.css";
+
+
 const App = () => {
 
   return (
