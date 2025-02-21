@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {FaPlus} from 'react-icons/fa'
+import { resetCv } from '../../store/cvSlice';
 function Panel() {
-
+const dispatch=useDispatch()
 const navigate=useNavigate()
   const [cvData, setCvData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,17 +42,15 @@ const [go, setgo] = useState(false)
     fetchCvData();
   }, [currentUser]); // currentUser değiştiğinde tekrar çalıştır
   
- 
-
-  
-  
-    
- 
+  const goMakeCv = () => {
+    dispatch(resetCv()); // CV verisini sıfırla
+    navigate('/make-cv'); // Yönlendir
+  };
   return (
     <div className='p-5 flex flex-wrap justify-center gap-5'>
 <div>
 <button 
-
+onClick={goMakeCv}
 className='bg-gray-100 cursor-pointer w-[350px] h-[300px] flex items-center justify-center 
 text-9xl shadow-md shadow-gray-400 rounded-2xl'>
 <FaPlus  className=' text-gray-400'/>
@@ -74,7 +73,13 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
       {/* Butonlar */}
       <div 
       className=" w-full px-2  absolute left-0 bottom-3
-      flex  gap-2">
+      flex flex-col  gap-2">
+      
+      <button className='w-full p-2 bg-purple-600 text-white font-bold border rounded-2xl'>
+      {cv?.cvTitle}
+      </button>
+
+        <div className='flex w-full gap-2'>
         <Link 
          to={`/view/${cv._id}`}
         className="text-white font-bold p-2 w-full bg-green-700 
@@ -89,6 +94,7 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
         >
           Update
         </Link>
+        </div>
 
         
       </div>

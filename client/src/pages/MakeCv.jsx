@@ -11,6 +11,7 @@ function MakeCv() {
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const { 
+    cvTitle,
     personalInfo,
     education,
     experience,
@@ -21,7 +22,9 @@ function MakeCv() {
       (state) => state.cv
     );
   const cvData = 
-   { personalInfo,
+   { 
+    cvTitle,
+    personalInfo,
     education,
     experience,
     skills,

@@ -9,7 +9,8 @@ import {
   addLanguage,
   removeSkill,
   addCustomField,
-  removeCustomField
+  removeCustomField,
+  updateCvTitle
 } from "../../store/cvSlice";
 import { Editor } from "primereact/editor";
 import { Link } from "react-router-dom";
@@ -28,7 +29,7 @@ const CvForm = () => {
   const header = renderHeader();
 
   const dispatch = useDispatch();
-  const { personalInfo, education, experience, skills, projects, customFields, languages } = useSelector(
+  const { personalInfo,cvTitle, education, experience, skills, projects, customFields, languages } = useSelector(
     (state) => state.cv
   );
 
@@ -59,6 +60,21 @@ const CvForm = () => {
           to={'/panel'}>Panel</Link>
       </div>
       <div className="px-12  space-y-3">
+
+       {/* CV Başlığı */}
+       <div className="space-y-3 py-2">
+       <h2 className="text-xl font-bold">CV Başlığı</h2>
+       <input
+         type="text"
+         name="cvTitle"
+         placeholder="CV Başlığı"
+         value={cvTitle}
+         onChange={(e) => dispatch(updateCvTitle(e.target.value))}
+         className="w-full p-3 rounded bg-[#eff2f9]"
+       />
+     </div>
+     
+     <hr />
 
         <div className=" space-y-3  py-2 ">
           <h2 className="text-xl font-bold ">Kişisel Bilgiler</h2>

@@ -7,10 +7,11 @@ export const createCV = async (req, res) => {
       return res.status(401).json({ message: "Kimlik doğrulama başarısız!" });
     }
 
-    const { personalInfo, education, experience, skills, projects, languages } = req.body;
+    const { cvTitle,personalInfo, education, experience, skills, projects, languages } = req.body;
 
     const newCV = new CV({
       userId: req.user.id, // Kullanıcının ID'sini kaydediyoruz
+      cvTitle,
       personalInfo,
       education,
       experience,
@@ -58,9 +59,6 @@ export const getCVById = async (req, res, next) => {
     next(error); // Pass any error to the next middleware
   }
 };
-
-
-
 
 
 // ✅ CV güncelle

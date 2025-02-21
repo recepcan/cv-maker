@@ -6,6 +6,10 @@ const CvSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  cvTitle:{
+    type:String,
+    required:true
+  },
   personalInfo: {
     fullName: String,
     jobTitle: String,

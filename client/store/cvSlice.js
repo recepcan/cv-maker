@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  cvTitle:'',
   personalInfo: {
     fullName: "",
     jobTitle: "",
@@ -21,6 +22,7 @@ const initialState = {
 };
 
 export const selectCvData = (state) => ({
+  cvTitle:state.cv.cvTitle,
     personalInfo: state.cv.personalInfo,
     education: state.cv.education,
     experience: state.cv.experience,
@@ -37,6 +39,10 @@ const cvSlice = createSlice({
   reducers: {
     setCvData: (state, action) => {
       return action.payload; // Gelen veriyi direkt olarak state'e atar
+    },
+    resetCv: () => initialState, 
+    updateCvTitle: (state, action) => {
+      state.cvTitle = action.payload;
     },
     updatePersonalInfo: (state, action) => {
       const { field, value } = action.payload;
@@ -83,6 +89,7 @@ const cvSlice = createSlice({
 
 export const {
   setCvData,
+  resetCv,
   updatePersonalInfo,
   addEducation,
   removeEducation,
@@ -95,7 +102,8 @@ export const {
   addLanguage,
   removeLanguage,
   addCustomField,
-  removeCustomField
+  removeCustomField,
+  updateCvTitle
 } = cvSlice.actions;
 
 export default cvSlice.reducer;
