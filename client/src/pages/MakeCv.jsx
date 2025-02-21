@@ -7,7 +7,7 @@ import Template2 from '../components/Template2';
 import { setActiveTab } from '../../store/userSlice';
 import { toast } from 'react-toastify';
 
-function Home() {
+function MakeCv() {
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const { 
@@ -102,4 +102,4 @@ console.log(activeTab)
   )
 }
 
-export default Home
+export default MakeCv

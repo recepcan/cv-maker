@@ -76,10 +76,10 @@ const {activeTab}=useSelector(state=>state.user)
 
   return (
    <div className='flex flex-col items-center justify-center bg-white w-full p-2'>
-   <div id='no-print' className='flex w-full lg:w-[794px] space-x-2'>
+   <div id='no-print' className='flex w-full lg:w-[794px] justify-center'>
    <button 
    
-   className='p-3 bg-blue-500 w-full text-white cursor-pointer font-extrabold rounded-3xl '
+   className='px-5 py-3 bg-blue-500  text-white cursor-pointer font-extrabold rounded-3xl '
    onClick={handleDownload}>
    Download
    </button>

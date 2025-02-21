@@ -19,6 +19,7 @@ export const createCV = async (req, res) => {
       languages,
     });
 
+    
     const savedCV = await newCV.save(); // CV'yi veritabanına kaydet
 
     // 📌 Kaydedilen CV'nin _id değerini de içeren yanıt döndür

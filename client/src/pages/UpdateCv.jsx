@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Home from './Home'
+import Home from './MakeCv'
 import CvForm from '../components/CvForm'
 import CvPreview from '../components/CvPreview'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -120,7 +120,7 @@ handleUpdate()
             Update CV
           </button>
         </div>
-        <div className='max-w-[500px] w-full overflow-auto'>
+        <div className='max-w-[500px] bg-white w-full overflow-auto'>
     
        { activeTab==="Template1" &&  <CvPreview  />}
        { activeTab==="Template2" &&  <Template2  />}
