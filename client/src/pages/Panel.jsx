@@ -4,6 +4,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {FaPlus} from 'react-icons/fa'
 import { resetCv } from '../../store/cvSlice';
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 function Panel() {
 const dispatch=useDispatch()
 const navigate=useNavigate()
@@ -46,6 +48,37 @@ const [go, setgo] = useState(false)
     dispatch(resetCv()); // CV verisini sıfırla
     navigate('/make-cv'); // Yönlendir
   };
+
+  const handleDelete = async (cvId) => {
+    const confirmDelete = window.confirm("Bu CV'yi silmek istediğinizden emin misiniz?");
+    if (!confirmDelete) return; // Kullanıcı iptal ederse hiçbir şey yapma
+  
+    try {
+      const response = await fetch(`/server/cv/delete/${cvId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || "Bir hata oluştu");
+      }
+  
+      toast.success("CV başarıyla silindi!");
+  
+      // Başarıyla silinen CV'yi state'ten çıkar
+      setCvData((prev) => prev.filter((cv) => cv._id !== cvId));
+  
+    } catch (error) {
+      console.error("CV silinemedi:", error.message);
+      toast.error(error.message);
+    }
+  };
+  
+  
   return (
     <div className='p-5 flex flex-wrap justify-center gap-5'>
 <div>
@@ -70,6 +103,11 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
       <h2 className='text-lg text-center font-bold '>{cv?.personalInfo?.phone}</h2>
       </div>
 
+      <button 
+       onClick={() => handleDelete(cv._id)}
+      className='p-1 cursor-pointer rounded bg-red-500 text-white absolute top-0 right-0'>
+      <RiDeleteBin6Line />
+      </button>
       {/* Butonlar */}
       <div 
       className=" w-full px-2  absolute left-0 bottom-3

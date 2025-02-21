@@ -45,6 +45,7 @@ const {activeTab}=useSelector(state=>state.user)
   }, [cvId]);
 
   const { 
+    cvTitle,
       personalInfo,
       education,
       experience,
@@ -55,7 +56,9 @@ const {activeTab}=useSelector(state=>state.user)
         (state) => state.cv
       );
     const cvData = 
-     { personalInfo,
+     { 
+      cvTitle,
+      personalInfo,
       education,
       experience,
       skills,
@@ -101,7 +104,7 @@ handleUpdate()
     return <div>loading</div>;
   }
 
-  console.log(cvData)
+  
 
   return (
     <div className="flex flex-col lg:flex-row relative w-full ">
