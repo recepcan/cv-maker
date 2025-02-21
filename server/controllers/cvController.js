@@ -9,6 +9,16 @@ export const createCV = async (req, res) => {
 
     const { cvTitle,personalInfo, education, experience, skills, projects, languages } = req.body;
 
+    if (!cvTitle) {
+      return res.status(400).json({ message: "CV başlığı zorunludur!" });
+    }
+
+    // Aynı başlığa sahip bir CV var mı kontrol et
+    const existingCv = await CV.findOne({ cvTitle });
+    if (existingCv) {
+      return res.status(400).json({ message: "Bu başlıkta bir CV zaten var!" });
+    }
+
     const newCV = new CV({
       userId: req.user.id, // Kullanıcının ID'sini kaydediyoruz
       cvTitle,

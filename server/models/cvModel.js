@@ -8,7 +8,8 @@ const CvSchema = new mongoose.Schema({
   },
   cvTitle:{
     type:String,
-    required:true
+    required:true,
+    unique:true
   },
   personalInfo: {
     fullName: String,
