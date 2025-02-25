@@ -84,7 +84,7 @@ const {activeTab}=useSelector(state=>state.user)
       }
   
       const result = await response.json();
-     toast.success("CV başarıyla güncellendi:", result);
+    //  toast.success("CV başarıyla güncellendi:", result);
     //  navigate(`/view/${cvId.cvId}`)
       return result; // Güncellenmiş CV'yi döndür
     } catch (error) {
@@ -130,7 +130,7 @@ handleUpdate()
   
         </div>
 
-        <div className='flex space-x-3 border border-white w-full p-3'>
+        <div className='flex space-x-3  border-white w-full p-3'>
         <button  
         className='border border-white w-full p-3 bg-sky-600 rounded-2xl '
         onClick={()=>dispatch(setActiveTab('Template1'))}>tab1</button>

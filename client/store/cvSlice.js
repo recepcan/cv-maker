@@ -52,13 +52,13 @@ const cvSlice = createSlice({
       state.education.push(action.payload);
     },
     removeEducation: (state, action) => {
-      state.education.splice(action.payload, 1);
+      state.education = state.education.filter(edu => edu._id !== action.payload);
     },
     addExperience: (state, action) => {
       state.experience.push(action.payload);
     },
     removeExperience: (state, action) => {
-      state.experience.splice(action.payload, 1);
+      state.experience = state.experience.filter(experience => experience._id !== action.payload);
     },
     addSkill: (state, action) => {
       state.skills.push(action.payload);
@@ -70,19 +70,21 @@ const cvSlice = createSlice({
       state.projects.push(action.payload);
     },
     removeProject: (state, action) => {
-      state.projects.splice(action.payload, 1);
+      state.projects = state.projects.filter(project => project._id !== action.payload);
+
     },
     addLanguage: (state, action) => {
       state.languages.push(action.payload);
     },
     removeLanguage: (state, action) => {
       state.languages = state.languages.filter(lang => lang !== action.payload);
+
     },
     addCustomField: (state, action) => {
       state.customFields.push(action.payload);
     },
     removeCustomField: (state, action) => {
-      state.customFields = state.customFields.filter((_, i) => i !== action.payload);
+      state.customFields = state.customFields.filter(customField => customField._id !== action.payload);
     },
   },
 });

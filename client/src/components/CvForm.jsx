@@ -10,10 +10,15 @@ import {
   removeSkill,
   addCustomField,
   removeCustomField,
-  updateCvTitle
+  updateCvTitle,
+  removeExperience,
+  removeEducation,
+  removeProject,
+  removeLanguage
 } from "../../store/cvSlice";
 import { Editor } from "primereact/editor";
 import { Link } from "react-router-dom";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CvForm = () => {
   const renderHeader = () => {
@@ -147,8 +152,13 @@ const CvForm = () => {
               {education.map((edu, i) => (
                 <div
                   key={i}
-                  className="bg-gray-300 p-2 rounded mt-1">
+                  className="bg-gray-300 p-2 rounded mt-1 w-full uppercase flex justify-between">
                   {edu.school} - {edu.degree} - ({edu.startYear}-{edu.endYear})
+                  <span 
+                  onClick={() => dispatch(removeEducation(edu._id))}
+                  className="p-1 cursor-pointer rounded bg-red-500 text-white ">
+                  <RiDeleteBin6Line/>
+                  </span>
                 </div>
               ))}
             </div>
@@ -185,6 +195,25 @@ const CvForm = () => {
           >
             Ekle
           </button>
+
+          {experience.length > 0 ? (
+            <div className="flex flex-wrap gap-2 ">
+              {experience.map((experience, index) => (
+                <span key={index}
+                  className="bg-gray-300 p-2 rounded mt-1 w-full uppercase flex justify-between"
+                 >
+                  {experience.position}-{experience.company}-({experience.startDate}-{experience.endDate})
+                  <span 
+                  onClick={() => dispatch(removeExperience(experience._id))}
+                  className="p-1 cursor-pointer rounded bg-red-500 text-white ">
+                  <RiDeleteBin6Line/>
+                  </span>
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">Henüz yetenek eklenmedi.</p>
+          )}
         </div>
 
         <hr />
@@ -219,9 +248,14 @@ const CvForm = () => {
               <div className="flex flex-wrap gap-2 ">
                 {skills.map((skill, index) => (
                   <span key={index}
-                    className="px-3 py-1 bg-blue-200 hover:bg-red-500 hover:text-red-800 transition-all duration-300 cursor-pointer text-blue-800 rounded-full "
-                    onClick={() => dispatch(removeSkill(skill))}>
+                    className="bg-gray-300 p-2 rounded mt-1 w-full uppercase flex justify-between "
+                    >
                     {skill}
+                    <span 
+                    onClick={() => dispatch(removeSkill(skill))}
+                  className="p-1 cursor-pointer rounded bg-red-500 text-white ">
+                  <RiDeleteBin6Line/>
+                  </span>
                   </span>
                 ))}
               </div>
@@ -263,6 +297,25 @@ const CvForm = () => {
           >
             Ekle
           </button>
+
+          {projects.length > 0 ? (
+            <div className="flex flex-wrap gap-2 ">
+              {projects.map((project, index) => (
+                <span key={index}
+                  className="bg-gray-300 p-2 rounded mt-1 w-full uppercase flex justify-between"
+                 >
+                  {project.name}-{project.description}
+                  <span 
+                  onClick={() => dispatch(removeProject(project._id))}
+                  className="p-1 cursor-pointer rounded bg-red-500 text-white ">
+                  <RiDeleteBin6Line/>
+                  </span>
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">Henüz yetenek eklenmedi.</p>
+          )}
         </div>
 
         <hr />
@@ -290,6 +343,24 @@ const CvForm = () => {
           >
             Ekle
           </button>
+          {languages.length > 0 ? (
+            <div className="flex flex-wrap gap-2 ">
+              {languages.map((lang, index) => (
+                <span key={index}
+                  className="bg-gray-300 p-2 rounded mt-1 w-full uppercase flex justify-between "
+                 >
+                  {lang}
+                  <span 
+                onClick={() => dispatch(removeLanguage(lang))}
+                className="p-1 cursor-pointer rounded bg-red-500 text-white ">
+                <RiDeleteBin6Line/>
+                </span>
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">Henüz dil eklenmedi.</p>
+          )}
         </div>
 
         <hr />
@@ -324,20 +395,24 @@ const CvForm = () => {
               Ekle
             </button>
 
-            <div className=" flex space-x-2 w-full">
-              {
-                customFields.map((item, i) => (
-                  <div key={i} className="">
-                    <button
-                      className="p-2 bg-blue-200 hover:bg-red-400 text-blue-800 rounded-2xl"
-                      onClick={() => { dispatch(removeCustomField(i)) }}
-                    >
-                      {item.name}
-                    </button>
-                  </div>
-                ))
-              }
-            </div>
+            {customFields.length > 0 ? (
+              <div className="flex flex-wrap gap-2 ">
+                {customFields.map((cf, index) => (
+                  <span key={index}
+                    className="bg-gray-300 p-2 rounded mt-1 w-full uppercase flex justify-between"
+                   >
+                    {cf.title}-{cf.name}-{cf.description}
+                    <span 
+                    onClick={() => dispatch(removeCustomField(cf._id))}
+                    className="p-1 cursor-pointer rounded bg-red-500 text-white ">
+                    <RiDeleteBin6Line/>
+                    </span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500">Henüz yetenek eklenmedi.</p>
+            )}
           </div>
         </div>
       </div>
