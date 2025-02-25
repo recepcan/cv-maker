@@ -19,6 +19,7 @@ const initialState = {
   projects: [], // { name, description, link }
   languages: [], // ["İngilizce", "Türkçe"]
   customFields: [],
+  
 };
 
 export const selectCvData = (state) => ({
@@ -32,6 +33,7 @@ export const selectCvData = (state) => ({
     customFields:state.cv.customFields,
   });
 
+  
   
 const cvSlice = createSlice({
   name: "cv",

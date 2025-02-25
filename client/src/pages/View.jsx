@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { removeSkill, selectCvData } from '../../store/cvSlice';
+import { removeSkill, selectCvData, setCvData } from '../../store/cvSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import CvPreview from '../components/CvPreview';
@@ -11,7 +11,7 @@ function View() {
       const cvPreviewRef = useRef(null);
 
       const cvId = useParams()
-      const [cvData, setCvData] = useState(null);
+      // const [cvData, setCvData] = useState(null);
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState(null);
       const { currentUser } = useSelector(state => state.user)
@@ -29,7 +29,7 @@ function View() {
             }
     
             const data = await response.json();
-            setCvData(data); // CV verisini state'e ata
+           dispatch(setCvData(data)); // CV verisini state'e ata
             setLoading(false); // Yükleme bitti
           } catch (error) {
             console.log(error)
@@ -38,14 +38,14 @@ function View() {
         };
     
         fetchCvData(); // Veriyi çek
-      }, [cvId]);
+      }, [cvId.cvId]);
 
 
     // PDF oluşturma fonksiyonu
 const handleDownload=()=>{
     window.print()
 }
-
+// console.log(cvData)
 
 const handleSubmit = async (e) => {
   
@@ -87,8 +87,8 @@ const {activeTab}=useSelector(state=>state.user)
    </div>
   <div className='w-full lg:w-[794px] '>
   
-  { activeTab==="Template1" &&  <CvPreview cvData={cvData} />}
-  { activeTab==="Template2" &&  <Template2 cvData={cvData} />}
+  { activeTab==="Template1" &&  <CvPreview  />}
+  { activeTab==="Template2" &&  <Template2  />}
 
   </div>
    </div>

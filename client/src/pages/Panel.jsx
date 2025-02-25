@@ -125,10 +125,6 @@ className='w-full h-full rounded-full' />
   
   }
 
-
-
-
-
 </header>
 
 <div>
@@ -158,6 +154,7 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
       className='p-1 cursor-pointer rounded bg-red-500 text-white  absolute z-10 top-0 right-0'>
       <RiDeleteBin6Line />
       </button>
+      
       {/* Butonlar */}
       <div 
       className=" w-full px-2  absolute z-10 left-0 bottom-3
