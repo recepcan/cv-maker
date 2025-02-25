@@ -45,25 +45,29 @@ function MakeCv() {
       });
   
       if (!response.ok) {
-        throw new Error("CV gönderilirken hata oluştu!");
+        return toast.error('Bu başlıkta bir cv zaten var !');
+       
       }
   
       const result = await response.json();
-      console.log("Başarılı:", result);
+      // console.log("Başarılı:", result);
   
       if (result.cvId) {
         navigate(`/view/${result.cvId}`);
       }
   
+     if(response.ok){
       toast.success("CV başarıyla kaydedildi!");
+     }
     } catch (error) {
       toast.error("Hata:", error);
+      console.log(error)
     }
   };
   
 
 const {activeTab}=useSelector(state=>state.user) 
-console.log(activeTab)
+// console.log(activeTab)
   return (
     <div className="flex flex-col lg:flex-row relative w-full ">
       <div className="lg:w-1/2 w-full">
@@ -89,16 +93,16 @@ console.log(activeTab)
   
         </div>
 
-        <div className='flex  space-x-3 border border-white w-full p-3'>
+        <div className='flex  space-x-3  border-white w-full p-3'>
         <button  
-        className='border border-white w-full p-3 bg-sky-600 rounded-2xl '
-        onClick={()=>dispatch(setActiveTab('Template1'))}>tab1</button>
+        className='border border-white  h-16 p-3 bg-sky-600 rounded-2xl '
+        onClick={()=>dispatch(setActiveTab('Template1'))}>Template-1</button>
         <button   
-        className='border border-white w-full p-3 bg-sky-600 rounded-2xl'
-        onClick={()=>dispatch(setActiveTab('Template2'))}>tab2</button>
+        className='border border-white  h-16 p-3 bg-sky-600 rounded-2xl'
+        onClick={()=>dispatch(setActiveTab('Template2'))}>Template-2</button>
         <button   
-        className='border border-white w-full p-3 bg-sky-600 rounded-2xl'
-        onClick={()=>dispatch(setActiveTab('Template3'))}>tab3</button>
+        className='border border-white  h-16 p-3 bg-sky-600 rounded-2xl'
+        onClick={()=>dispatch(setActiveTab('Template3'))}>Template-3</button>
         </div>
       </div>
     </div>

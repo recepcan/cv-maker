@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import {FaPlus} from 'react-icons/fa'
 import { resetCv } from '../../store/cvSlice';
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { signoutSuccess } from '../../store/userSlice';
 
 function Panel() {
 const dispatch=useDispatch()
@@ -13,7 +14,7 @@ const navigate=useNavigate()
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { currentUser } = useSelector(state => state.user)
-
+const [profileMenu, setProfileMenu] = useState(false)
 const [go, setgo] = useState(false)
 
   useEffect(() => {
@@ -77,10 +78,59 @@ const [go, setgo] = useState(false)
       toast.error(error.message);
     }
   };
-  
+
+  const handleSignOut =async()=>{
+    try {
+     const res= await fetch('/server/user/signout', {
+      method: "POST",
+      credentials: "include",
+    })
+   if(res.ok){
+    toast.success('Çıkış Yapıldı')
+    dispatch(signoutSuccess())
+    
+    
+   }
+
+    } catch (error) {
+      toast.error(error)
+    }
+  } 
+  console.log(currentUser)
   
   return (
-    <div className='p-5 flex flex-wrap justify-center gap-5'>
+    <div className=' flex flex-wrap justify-center gap-5'>
+<header className='w-full  sticky top-0 left-0 flex items-center justify-between bg-gray-200 h-16 p-4'>
+
+<div className='w-10 h-10 bg-gray-400 flex space-x-1 items-center rounded-full border  z-50' 
+onClick={()=>setProfileMenu(!profileMenu)}    
+>
+<img src={currentUser.profilePicture}
+alt=""
+className='w-full h-full rounded-full' />
+<div>@{currentUser.username}</div>
+</div>
+{
+  profileMenu && (
+    <div className={`${profileMenu ? 'bg-white p-5  absolute  top-16 left-2 shadow-md shadow-gray-400 rounded-lg  z-50' : 'hidden z-50'}`}>
+    <div>{currentUser.username}</div>
+    <div>{currentUser.email}</div>
+  <button 
+  onClick={handleSignOut}
+  className='bg-red-600 text-white p-2 rounded-lg'>
+  Çıkış Yap
+  </button>
+  
+    </div>)
+  
+  }
+
+
+
+
+
+</header>
+
 <div>
 <button 
 onClick={goMakeCv}
@@ -92,8 +142,8 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
   {cvData?.map((cv, i) => (
     <div 
       key={i}
-      className="p-6 shadow-md shadow-gray-400 rounded-3xl bg-white
-       w-[350px] h-[300px] text-[16px] relative"
+      className="p-6 shadow-md shadow-gray-400 rounded-lg bg-white
+       w-[350px] h-[300px] text-[16px] relative z-10"
     >
       {/* İçerik */}
       <div className=" bg-gray-200 rounded-2xl  space-y-3 p-2">
@@ -105,12 +155,12 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
 
       <button 
        onClick={() => handleDelete(cv._id)}
-      className='p-1 cursor-pointer rounded bg-red-500 text-white absolute top-0 right-0'>
+      className='p-1 cursor-pointer rounded bg-red-500 text-white  absolute z-10 top-0 right-0'>
       <RiDeleteBin6Line />
       </button>
       {/* Butonlar */}
       <div 
-      className=" w-full px-2  absolute left-0 bottom-3
+      className=" w-full px-2  absolute z-10 left-0 bottom-3
       flex flex-col  gap-2">
       
       <button className='w-full p-2 bg-purple-600 text-white font-bold border rounded-2xl'>

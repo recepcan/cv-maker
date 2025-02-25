@@ -106,6 +106,11 @@ function SignIn() {
                     SignIn
                     </button>
               <OAuth/>
+
+              <div className='w-full text-left'>
+Don't have an account <Link className='text-blue-600' to={'/sign-up'}>SignUp</Link>
+</div>
+
                     </form>
             </div>
 

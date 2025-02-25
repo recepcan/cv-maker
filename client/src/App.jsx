@@ -21,13 +21,13 @@ const App = () => {
         <Routes>
         <Route element={<PrivateRoute />}>
           <Route path='/panel' element={ <Panel />} />
-        </Route>
           <Route path="/make-cv" element={<MakeCv />} />
           <Route path="/view/:cvId" element={<View />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/panel" element={<Panel />} />
           <Route path="/update-cv/:cvId" element={<UpdateCv />} />
+        </Route>
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
 
           <Route path="/" element={<SignUp />} />
         </Routes>

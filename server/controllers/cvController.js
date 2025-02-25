@@ -1,7 +1,8 @@
 import CV from "../models/cvModel.js";
+import {errorHandler} from '../utils/error.js'
 
 // ✅ Yeni CV oluştur (Kimlik doğrulama gerekli)
-export const createCV = async (req, res) => {
+export const createCV = async (req, res,next) => {
   try {
     if (!req.user || !req.user.id) {
       return res.status(401).json({ message: "Kimlik doğrulama başarısız!" });
@@ -16,7 +17,8 @@ export const createCV = async (req, res) => {
     // Aynı başlığa sahip bir CV var mı kontrol et
     const existingCv = await CV.findOne({ cvTitle });
     if (existingCv) {
-      return res.status(400).json({ message: "Bu başlıkta bir CV zaten var!" });
+      return   next(errorHandler(400, 'Bu başlıkta bir CV zaten var!'));
+      // res.status(400).json({ message: "Bu başlıkta bir CV zaten var!" });
     }
 
     const newCV = new CV({
@@ -37,18 +39,20 @@ export const createCV = async (req, res) => {
     res.status(201).json({ success: true, cvId: savedCV._id, cv: savedCV });
   } catch (error) {
     res.status(500).json({ message: "Sunucu hatası!", error });
+    next(error)
   }
 };
 
 
 // ✅ Kullanıcının tüm CV'lerini getir
-export const getUserCVs = async (req, res) => {
+export const getUserCVs = async (req, res,next) => {
   try {
     const userId = req.params.userId;
     const cvs = await CV.find({ userId });
     res.status(200).json(cvs);
   } catch (error) {
     console.error(error);
+    next(error) 
     res.status(500).json({ message: "Sunucu hatası!" });
   }
 };
