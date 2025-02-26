@@ -130,7 +130,7 @@ className='w-full h-full rounded-full' />
 <div>
 <button 
 onClick={goMakeCv}
-className='bg-gray-100 cursor-pointer w-[350px] h-[300px] flex items-center justify-center 
+className='bg-gray-100 cursor-pointer w-[300px] h-[300px] flex items-center justify-center 
 text-9xl shadow-md shadow-gray-400 rounded-2xl'>
 <FaPlus  className=' text-gray-400'/>
 </button>
@@ -139,14 +139,14 @@ text-9xl shadow-md shadow-gray-400 rounded-2xl'>
     <div 
       key={i}
       className="p-6 shadow-md shadow-gray-400 rounded-lg bg-white
-       w-[350px] h-[300px] text-[16px] relative z-10"
+       w-[300px] h-[300px] text-[16px] relative z-10"
     >
       {/* İçerik */}
-      <div className=" bg-gray-200 rounded-2xl  space-y-3 p-2">
-     <h2 className='text-lg text-center font-bold '> {cv?.personalInfo?.fullName}</h2>
-      <h2 className='text-lg text-center font-bold '>{cv?.personalInfo?.jobTitle}</h2>
-      <h2 className='text-lg text-center font-bold '>{cv?.personalInfo?.email}</h2>
-      <h2 className='text-lg text-center font-bold '>{cv?.personalInfo?.phone}</h2>
+      <div className=" bg-gray-200 rounded-2xl  space-y-3 p-2 ">
+     <h2 className='text-sm text-center font-bold text-wrap'> {cv?.personalInfo?.fullName} </h2>
+      <h2 className='text-sm text-center font-bold text-wrap'>{cv?.personalInfo?.jobTitle}</h2>
+      <h2 className='text-sm text-center font-bold text-wrap'>{cv?.personalInfo?.email}</h2>
+      <h2 className='text-sm text-center font-bold text-wrap'>{cv?.personalInfo?.phone}</h2>
       </div>
 
       <button 
