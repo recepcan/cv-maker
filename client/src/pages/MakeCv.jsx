@@ -45,7 +45,7 @@ function MakeCv() {
       });
   
       if (!response.ok) {
-        return toast.error('Bu başlıkta bir cv zaten var !');
+        return toast.error(response.statusText);
        
       }
   

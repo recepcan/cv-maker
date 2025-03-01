@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/save",verifyToken, createCV); // Yeni CV oluştur
 router.get("/get/:userId",verifyToken, getUserCVs); // Kullanıcının tüm CV'lerini getir
-router.get('/:id', getCVById);
+router.get('/:id',verifyToken, getCVById);
 router.put('/update/:id',verifyToken,updateCV)
 router.delete("/delete/:id",verifyToken, deleteCV); // CV sil
 

@@ -66,7 +66,7 @@ const {activeTab}=useSelector(state=>state.user)
       customFields,
       languages
     };
- useEffect(() => {
+
   const handleUpdate =async()=>{
   
     try {
@@ -84,7 +84,7 @@ const {activeTab}=useSelector(state=>state.user)
       }
   
       const result = await response.json();
-    //  toast.success("CV başarıyla güncellendi:", result);
+     toast.success("CV başarıyla güncellendi:", result);
     //  navigate(`/view/${cvId.cvId}`)
       return result; // Güncellenmiş CV'yi döndür
     } catch (error) {
@@ -93,9 +93,7 @@ const {activeTab}=useSelector(state=>state.user)
     }
   
 }
-handleUpdate()
- }, [cvData])
- 
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -117,7 +115,7 @@ handleUpdate()
 
         <div className="max-w-[600px] w-full h-10 flex justify-end ">
           <button
-            
+            onClick={handleUpdate}
             className=" py-2 px-4 bg-blue-500 cursor-pointer text-white rounded font-bold"
           >
             Update CV
