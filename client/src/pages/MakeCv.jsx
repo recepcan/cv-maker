@@ -33,6 +33,8 @@ function MakeCv() {
     languages
   };
 
+ 
+
   const handleDownload = async () => {
     try {
       const response = await fetch("/server/cv/save", {

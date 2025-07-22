@@ -14,11 +14,13 @@ import {
   removeExperience,
   removeEducation,
   removeProject,
-  removeLanguage
+  removeLanguage,
+  updateImage
 } from "../../store/cvSlice";
 import { Editor } from "primereact/editor";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const CvForm = () => {
   const renderHeader = () => {
@@ -38,11 +40,59 @@ const CvForm = () => {
     (state) => state.cv
   );
 
+  const {image} = useSelector(
+    (state) => state.cv
+  );
+
+
 
   const handlePersonalInfoChange = (e) => {
     const { name, value } = e.target;
     dispatch(updatePersonalInfo({ field: name, value }));
   };
+const [file, setFile] = useState(null);
+
+const handleImageChange = (e) => {
+  const selectedFile = e.target.files[0];
+  if (selectedFile) {
+    setFile(selectedFile); // Cloudinary için
+   // dispatch(updateImage(URL.createObjectURL(selectedFile)));  Önizleme için
+  }
+};
+
+   const handleImageUpload = async () => {
+      if (!file) {
+        toast.error('Please select a file to upload.');
+        return;
+      }
+  
+      try {
+        const imageData = new FormData();
+        imageData.append('file', file);
+        imageData.append('upload_preset', 'cv-maker'); // Cloudinary için preset
+  
+        const cloudinaryRes = await fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+          method: 'POST',
+          body: imageData,
+        });
+  
+        const cloudinaryData = await cloudinaryRes.json();
+        if (!cloudinaryRes.ok) {
+          toast.error('Image upload failed.');
+          return;
+        }
+  
+        // Görsel bağlantısını form verisine kaydet
+       dispatch(updateImage(cloudinaryData.secure_url));
+        toast.success('Image uploaded successfully!');
+      } catch (error) {
+        toast.error('Something went wrong during image upload.');
+        console.log(error);
+      }
+    };
+
+
+
   const [text, setText] = useState(personalInfo.about || "");
 
   const handleEditorChange = (e) => {
@@ -80,9 +130,18 @@ const CvForm = () => {
      </div>
      
      <hr />
-
+  {/*Kişisel Bilgiler */}
         <div className=" space-y-3  py-2 ">
           <h2 className="text-xl font-bold ">Kişisel Bilgiler</h2>
+          <input 
+          type="file" name="image"
+          accept=".jpg, .jpeg, image/jpeg"
+           id=""
+           onChange={handleImageChange} />
+           <button onClick={handleImageUpload} className="bg-blue-500 text-white px-4 py-2 rounded">
+  Görseli Yükle
+</button>
+
           <div className="grid grid-cols-2 gap-x-10 gap-y-5">
             {["fullName", "jobTitle", "email", "phone", "address", "website", "linkedin", "github"].map(
               (field, i) => (

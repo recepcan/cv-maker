@@ -8,6 +8,7 @@ const initialState = {
     email: "",
     phone: "",
     address: "",
+    image:"",
     about: "",
     website: "",
     linkedin: "",
@@ -23,6 +24,7 @@ const initialState = {
 };
 
 export const selectCvData = (state) => ({
+  image:state.cv.personalInfo.image,
   cvTitle:state.cv.cvTitle,
     personalInfo: state.cv.personalInfo,
     education: state.cv.education,
@@ -49,6 +51,9 @@ const cvSlice = createSlice({
     updatePersonalInfo: (state, action) => {
       const { field, value } = action.payload;
       state.personalInfo[field] = value;
+    },
+    updateImage:(state,action)=>{
+      state.personalInfo.image=action.payload;
     },
     addEducation: (state, action) => {
       state.education.push(action.payload);
@@ -95,6 +100,7 @@ export const {
   setCvData,
   resetCv,
   updatePersonalInfo,
+  updateImage,
   addEducation,
   removeEducation,
   addExperience,

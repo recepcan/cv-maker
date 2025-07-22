@@ -10,6 +10,7 @@ const CvPreview = () => {
   const { personalInfo, education, experience, skills, projects, customFields, languages } = useSelector(
     (state) => state.cv
   );
+ 
 
   const dispatch = useDispatch();
 
@@ -18,68 +19,81 @@ const CvPreview = () => {
       className="p-6    w-full    text-sm    ">
       <div
         className=" w-full">
+
         {/* Kişisel Bilgiler */}
-        <div className=" py-4 space-y-2">
-          <div className="flex justify-center items-center font-bold space-x-1 tracking-wide w-full">
-            <h1 >{personalInfo.fullName || "Ad Soyad"},</h1>
-            <p >{personalInfo.jobTitle || "Meslek Unvanı"}</p>
+        <div className=" py-4  flex items-center space-x-1">
+
+          <div className="w-1/5 h-28  border-black">
+             <img src={personalInfo.image} alt="" className="w-24 h-28 border-2 object-cover"/>
           </div>
+          <div className=" w-4/5 h-28  flex flex-col items-start justify-start">
 
-          <div className="flex justify-center items-center w-full  space-x-1">
-
-            <p>{personalInfo.address || "Adres"},</p>
-            <p>{personalInfo.email || "E-posta"},</p>
-            <p>{personalInfo.phone || "Telefon"}</p>
-
-          </div>
-          <hr />
-
-          <div className="flex items-center space-x-8">
-            <h2 className=" font-bold w-1/5  ">Profile</h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: personalInfo.about || "" }}
-              className=" w-4/5">
+            <div className="  flex justify-start items-center font-bold  tracking-wide space-x-1">
+              <h1 >{personalInfo.fullName || "Ad Soyad"},</h1>
+              <p >{personalInfo.jobTitle || "Meslek Unvanı"}</p>
             </div>
+
+            <div className="flex flex-col justify-start items-start w-full space-y-1 ">
+
+              <p>{personalInfo.address || "Adres"}</p>
+              <p>{personalInfo.email || "E-posta"}</p>
+              <p>{personalInfo.phone || "Telefon"}</p>
+
+            </div>
+
           </div>
 
-          <hr />
+        </div>
 
-          <div className="flex items-center space-x-8">
-            <h2 className=" font-bold w-1/5 ">Links</h2>
-            <div className=" space-x-2 w-4/5 ">
-              {personalInfo.website &&
-                <div
-                >
-                Website : <span
-                    className="text-blue-500  w-4/5 underline">
-                    {personalInfo.website}
-                  </span>
-                </div>}
+        <hr />
 
-              {personalInfo.linkedin &&
-                <div
-                >
-                linkedin : <span
-                    className="text-blue-500  w-4/5 underline">
-                    {personalInfo.linkedin}
-                  </span>
-                </div>}
-
-              {personalInfo.github &&
-                <div
-                >
-                Github : <span
-                    className="text-blue-500  w-4/5 underline">
-                    {personalInfo.github}
-                  </span>
-                </div>}        
-           </div>
+        {/* profile */}
+        <div className="py-4  flex items-center space-x-1">
+          <h2 className=" font-bold w-1/5  ">Profile</h2>
+          <div
+            dangerouslySetInnerHTML={{ __html: personalInfo.about || "" }}
+            className=" w-4/5">
           </div>
         </div>
+
+        <hr />
+        {/* links */}
+        <div className="py-4 flex items-center space-x-1">
+          <h2 className=" font-bold w-1/5 ">Links</h2>
+          <div className=" space-x-2 w-4/5 ">
+            {personalInfo.website &&
+              <div
+              >
+                Website : <span
+                  className="text-blue-500  w-4/5 underline">
+                  {personalInfo.website}
+                </span>
+              </div>}
+
+            {personalInfo.linkedin &&
+              <div
+              >
+                linkedin : <span
+                  className="text-blue-500  w-4/5 underline">
+                  {personalInfo.linkedin}
+                </span>
+              </div>}
+
+            {personalInfo.github &&
+              <div
+              >
+                Github : <span
+                  className="text-blue-500  w-4/5 underline">
+                  {personalInfo.github}
+                </span>
+              </div>}
+          </div>
+        </div>
+
         <hr />
 
         {/* Eğitim */}
-        <div className="py-4  flex  items-center space-x-8 ">
+        <div className="py-4  flex  items-center space-x-1 ">
 
           <h2 className=" font-bold  w-1/5">Eğitim</h2>
           <div className="w-4/5">
@@ -90,14 +104,14 @@ const CvPreview = () => {
                   <div className=" text-gray-500">{edu.startYear} - {edu.endYear}</div>
                 </div>
               ))
-            ) }
+            )}
           </div>
         </div>
         <hr />
 
         {/* Deneyim */}
 
-        <div className="py-4 flex items-center space-x-8">
+        <div className="py-4 flex items-center space-x-1">
           <h2 className=" font-bold w-1/5 ">Deneyim</h2>
           <div className="flex flex-col space-y-2 w-4/5 ">
             {experience?.length > 0 && (
@@ -108,14 +122,14 @@ const CvPreview = () => {
                   <p className="pl-2">   {exp.description}</p>
                 </div>
               ))
-            ) }
+            )}
           </div>
         </div>
 
         <hr />
 
         {/* Yetenekler */}
-        <div className="py-4 flex items-center space-x-8">
+        <div className="py-4 flex items-center space-x-1">
           <h2 className=" font-bold w-1/5">Yetenekler</h2>
           {skills?.length > 0 && (
             <div className="flex flex-wrap gap-2 w-4/5">
@@ -128,33 +142,33 @@ const CvPreview = () => {
                 </span>
               ))}
             </div>
-          ) }
+          )}
         </div>
 
         <hr />
 
         {/* Projeler */}
-        <div className="py-4 flex items-center space-x-8">
+        <div className="py-4 flex items-center space-x-1">
           <h2 className=" font-bold w-1/5">Projeler</h2>
           <div className="w-4/5  flex flex-col space-y-2">
-          {projects?.length > 0 && (
-            projects.map((project, index) => (
-              <div key={index} className="w-full ">
-                <p className="font-semibold">{project.name}</p>
-                <p className=" text-gray-500">{project.description}</p>
-                {project.link && <div>
-                  Projeyi Gör : <span className="text-blue-500"> {project.link}</span>
-                </div>}
-              </div>
-            ))
-          ) }
+            {projects?.length > 0 && (
+              projects.map((project, index) => (
+                <div key={index} className="w-full ">
+                  <p className="font-semibold">{project.name}</p>
+                  <p className=" text-gray-500">{project.description}</p>
+                  {project.link && <div>
+                    Projeyi Gör : <span className="text-blue-500"> {project.link}</span>
+                  </div>}
+                </div>
+              ))
+            )}
           </div>
         </div>
 
         <hr />
 
         {/* Diller */}
-        <div className="py-4 flex items-center space-x-8">
+        <div className="py-4 flex items-center space-x-1">
           <h2 className=" font-bold w-1/5">Diller</h2>
           {languages?.length > 0 && (
             <div className="flex flex-wrap gap-2 w-4/5">
@@ -168,7 +182,7 @@ const CvPreview = () => {
 
         <hr />
         {/* Custom */}
-        <div className="py-4 flex items-center space-x-8">
+        <div className="py-4 flex items-center space-x-1">
           <h2 className=" font-bold w-1/5">{customFields[0]?.title}</h2>
           {customFields?.length > 0 && (
             <div className="flex flex-wrap gap-2 w-4/5">

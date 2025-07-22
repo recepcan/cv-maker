@@ -17,6 +17,7 @@ const CvSchema = new mongoose.Schema({
     email: String,
     phone: String,
     address: String,
+    image:String,
     about: String,
     website: String,
     linkedin: String,
