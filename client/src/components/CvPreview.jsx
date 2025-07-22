@@ -24,7 +24,7 @@ const CvPreview = () => {
         <div className=" py-4  flex items-center space-x-1">
 
           <div className="w-1/5 h-28  border-black">
-             <img src={personalInfo.image} alt="" className="w-24 h-28 border-2 object-cover"/>
+             <img src={personalInfo.image} alt="" className="w-24 h-28  object-cover"/>
           </div>
           <div className=" w-4/5 h-28  flex flex-col items-start justify-start">
 
